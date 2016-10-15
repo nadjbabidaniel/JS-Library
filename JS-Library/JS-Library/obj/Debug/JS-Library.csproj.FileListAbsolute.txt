@@ -1,0 +1,5 @@
+C:\Users\DanielN\Desktop\JS-Library\JS-Library\JS-Library\bin\JS-Library.dll.config
+C:\Users\DanielN\Desktop\JS-Library\JS-Library\JS-Library\bin\JS-Library.dll
+C:\Users\DanielN\Desktop\JS-Library\JS-Library\JS-Library\bin\JS-Library.pdb
+C:\Users\DanielN\Desktop\JS-Library\JS-Library\JS-Library\obj\Debug\JS-Library.dll
+C:\Users\DanielN\Desktop\JS-Library\JS-Library\JS-Library\obj\Debug\JS-Library.pdb
