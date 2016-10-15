@@ -1,0 +1,5 @@
+C:\Users\PC29\Desktop\CRMWebResourceProject\CRMWebResourceProject\bin\CRMWebResourceProject.dll.config
+C:\Users\PC29\Desktop\CRMWebResourceProject\CRMWebResourceProject\bin\CRMWebResourceProject.dll
+C:\Users\PC29\Desktop\CRMWebResourceProject\CRMWebResourceProject\bin\CRMWebResourceProject.pdb
+C:\Users\PC29\Desktop\CRMWebResourceProject\CRMWebResourceProject\obj\Debug\CRMWebResourceProject.dll
+C:\Users\PC29\Desktop\CRMWebResourceProject\CRMWebResourceProject\obj\Debug\CRMWebResourceProject.pdb

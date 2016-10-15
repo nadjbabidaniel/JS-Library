@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 * Function executes WF "RESERVIERUNGSANFRAGE | Reservierungsanfrage angenommen"
 * 
 * Params  :
