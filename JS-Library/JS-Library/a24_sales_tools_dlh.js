@@ -1,4 +1,4 @@
-﻿/*!
+/*!
 * Function executes WF "RESERVIERUNGSANFRAGE | Reservierungsanfrage angenommen"
 * 
 * Params  :
@@ -84,14 +84,13 @@ function Sales_tools_dlh_CreateQuote(FirstPrimaryItemId) {
                                     console.log("WF wurde ausgeführt.1 SUCCESS");
 
 
-
                                     $.ajax({
                                         type: "GET",
                                         contentType: "application/json; charset=utf-8",
                                         datatype: "json",
                                         async: true,
                                         url: serverURL + "/XRMServices/2011/OrganizationData.svc/QuoteSet?$" +
-                                                                    "select=QuoteId,QuoteNumber,CreatedOn,Name&$" +
+                                                                    "select=QuoteId,QuoteNumber,CreatedOn,Name&$orderby=CreatedOn desc&$" +
                                                                     "filter=OpportunityId/Id eq guid'" + FirstPrimaryItemId + "'",
 
 
@@ -103,46 +102,34 @@ function Sales_tools_dlh_CreateQuote(FirstPrimaryItemId) {
 
                                             if (data && data.d && data.d.results) {
                                                 for (var i = 0; i < data.d.results.length; i++) {
-                                                    console.log("Testttt1 ", data.d.results[i].Name);
+                                                    console.log("Testttt1 ", data.d.results[i].QuoteId);
                                                     console.log("Testttt2 ", data.d.results[i].CreatedOn);
                                                 }
-                                            }                                                                                    
-
+                                                console.log("Testttt1 ", data.d.results[0].QuoteId);
+                                                console.log("Testttt2 ", data.d.results[0].CreatedOn);
+                                            }
                                             //Xrm.Utility.openEntityForm("quote", "d207d910-8790-e611-80f2-5065f38b03e1");
 
-
+                                            var objFilteredWF = null;
                                             var serverUrl = Xrm.Page.context.getClientUrl();
-
+                                            //Prepare ODATA query to fetch WF GUID by WF Name
                                             var odataSelect = serverUrl + "/xrmservices/2011/OrganizationData.svc/WorkflowSet?$select=WorkflowId&$filter=StateCode/Value eq 1 and ParentWorkflowId/Id eq null and Name eq 'RESERVIERUNGSANFRAGE | Reservierungsanfrage angenommen'";
-
-                                            var xmlHttp = new XMLHttpRequest();
-                                            xmlHttp.open("GET", odataSelect, false);
-                                            xmlHttp.send();
-
-                                            if (xmlHttp.status == 200) {
-                                                var result = xmlHttp.responseText;
-
-                                                //var xmlDoc;
-                                                //if (window.DOMParser) { // Firefox, Chrome, Opera, etc.
-                                                //    parser = new DOMParser();
-                                                //    xmlDoc = parser.parseFromString(result, "text/xml");
-                                                //}
-                                                //else // Internet Explorer
-                                                {
-                                                    xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-                                                    xmlDoc.async = false;
-                                                    xmlDoc.loadXML(result);
-                                                }
-
-                                                var id = xmlDoc.getElementsByTagName("d:WorkflowId")[0].childNodes[0].nodeValue;
-
-                                                alert("ID: ", id);
-                                                if (id === "DA6C8BED-48E4-4F3C-9BE0-C64942C52F6B") alert("EQUAL");
-                                                else alert("FALSE");
-                                            }
-
-
-
+                                            $.ajax({
+                                                type: "GET",
+                                                contentType: "application/json; charset=utf-8",
+                                            datatype: "json",
+                                            url: odataSelect,
+                                            beforeSend: function (XMLHttpRequest) { XMLHttpRequest.setRequestHeader("Accept", "application/json"); },
+                                            success: function (data, textStatus, XmlHttpRequest) {
+                                                objFilteredWF = data.d;
+                                                var wfID = null;
+                                                if (objFilteredWF != null && objFilteredWF.results != null && objFilteredWF.results.length != 0 && objFilteredWF.results[0].WorkflowId != null) {
+                                                    wfID = objFilteredWF.results[0].WorkflowId;
+                                                    alert("ID2: " + wfID + "----");
+                                                }                                               
+                                            },
+                                            error: function (XmlHttpRequest, textStatus, errorThrown) { alert('OData Select Failed: ' + odataSelect); }
+                                        });                                   
                                         }
                                     });
 
