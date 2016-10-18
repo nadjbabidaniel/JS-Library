@@ -5,7 +5,7 @@
 *           FirstPrimaryItemId - Current opportunity Id
 * Returns : 
 */
-function Sales_tools_dlh_CreateQuote(FirstPrimaryItemId, wfNameParameter) {
+function Sales_tools_dlh_CreateQuote(FirstPrimaryItemId) {
 
     debugger;
     var serverURL = Xrm.Page.context.getClientUrl();
